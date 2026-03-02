@@ -57,7 +57,7 @@ function showSection(sectionId) {
 
 function addQuestion() {
     const questionNum = questions.length + 1;
-    const questionId = 'q' + Date.now();
+    const questionId = 'q' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     
     questions.push({
         id: questionId,
