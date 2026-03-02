@@ -46,7 +46,34 @@ window.onload = function() {
             addQuestion();
         }
     }
+    
+    // הוספת event listeners לכפתורים
+    setupEventListeners();
 };
+
+function setupEventListeners() {
+    // כפתורים ראשיים
+    const addQuestionBtn = document.getElementById('addQuestionBtn');
+    if (addQuestionBtn) addQuestionBtn.addEventListener('click', addQuestion);
+    
+    const generateQuizBtn = document.getElementById('generateQuizBtn');
+    if (generateQuizBtn) generateQuizBtn.addEventListener('click', generateQuiz);
+    
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    if (copyLinkBtn) copyLinkBtn.addEventListener('click', copyLink);
+    
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+    if (resetQuizBtn) resetQuizBtn.addEventListener('click', resetQuiz);
+    
+    const submitQuizBtn = document.getElementById('submitQuizBtn');
+    if (submitQuizBtn) submitQuizBtn.addEventListener('click', submitQuiz);
+    
+    const viewLeaderboardBtn = document.getElementById('viewLeaderboardBtn');
+    if (viewLeaderboardBtn) viewLeaderboardBtn.addEventListener('click', viewLeaderboard);
+    
+    const backToResultsBtn = document.getElementById('backToResultsBtn');
+    if (backToResultsBtn) backToResultsBtn.addEventListener('click', backToResults);
+}
 
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(section => {
@@ -70,37 +97,83 @@ function addQuestion() {
     const questionCard = document.createElement('div');
     questionCard.className = 'question-card';
     questionCard.id = questionId;
-    questionCard.innerHTML = `
-        <div class="question-header">
-            <span class="question-number">שאלה ${questionNum}</span>
-            ${questions.length > 5 ? `<button class="btn-remove" onclick="removeQuestion('${questionId}')">🗑️ מחק</button>` : ''}
-        </div>
-        <div class="form-group">
-            <label>השאלה:</label>
-            <input type="text" class="question-input" placeholder="לדוגמה: מה הצבע האהוב עליי?" onchange="updateQuestion('${questionId}', 'question', this.value)">
-        </div>
-        <div class="form-group">
-            <label>תשובות אפשריות (סמן את התשובה הנכונה):</label>
-            <div style="margin-top: 10px;">
-                <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                    <input type="radio" name="${questionId}_correct" value="0" onchange="updateQuestion('${questionId}', 'correctAnswer', 0)" style="width: auto; margin-left: 10px;">
-                    <input type="text" placeholder="תשובה 1" onchange="updateQuestionOption('${questionId}', 0, this.value)" style="flex: 1;">
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                    <input type="radio" name="${questionId}_correct" value="1" onchange="updateQuestion('${questionId}', 'correctAnswer', 1)" style="width: auto; margin-left: 10px;">
-                    <input type="text" placeholder="תשובה 2" onchange="updateQuestionOption('${questionId}', 1, this.value)" style="flex: 1;">
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                    <input type="radio" name="${questionId}_correct" value="2" onchange="updateQuestion('${questionId}', 'correctAnswer', 2)" style="width: auto; margin-left: 10px;">
-                    <input type="text" placeholder="תשובה 3" onchange="updateQuestionOption('${questionId}', 2, this.value)" style="flex: 1;">
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                    <input type="radio" name="${questionId}_correct" value="3" onchange="updateQuestion('${questionId}', 'correctAnswer', 3)" style="width: auto; margin-left: 10px;">
-                    <input type="text" placeholder="תשובה 4" onchange="updateQuestionOption('${questionId}', 3, this.value)" style="flex: 1;">
-                </div>
-            </div>
-        </div>
-    `;
+    
+    const questionHeader = document.createElement('div');
+    questionHeader.className = 'question-header';
+    
+    const questionNumber = document.createElement('span');
+    questionNumber.className = 'question-number';
+    questionNumber.textContent = `שאלה ${questionNum}`;
+    questionHeader.appendChild(questionNumber);
+    
+    if (questions.length > 5) {
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn-remove';
+        removeBtn.textContent = '🗑️ מחק';
+        removeBtn.addEventListener('click', () => removeQuestion(questionId));
+        questionHeader.appendChild(removeBtn);
+    }
+    
+    questionCard.appendChild(questionHeader);
+    
+    // שדה השאלה
+    const questionFormGroup = document.createElement('div');
+    questionFormGroup.className = 'form-group';
+    
+    const questionLabel = document.createElement('label');
+    questionLabel.textContent = 'השאלה:';
+    questionFormGroup.appendChild(questionLabel);
+    
+    const questionInput = document.createElement('input');
+    questionInput.type = 'text';
+    questionInput.className = 'question-input';
+    questionInput.placeholder = 'לדוגמה: מה הצבע האהוב עליי?';
+    questionInput.maxLength = 150;
+    questionInput.addEventListener('change', (e) => updateQuestion(questionId, 'question', e.target.value));
+    questionFormGroup.appendChild(questionInput);
+    
+    questionCard.appendChild(questionFormGroup);
+    
+    // תשובות
+    const optionsFormGroup = document.createElement('div');
+    optionsFormGroup.className = 'form-group';
+    
+    const optionsLabel = document.createElement('label');
+    optionsLabel.textContent = 'תשובות אפשריות (סמן את התשובה הנכונה):';
+    optionsFormGroup.appendChild(optionsLabel);
+    
+    const optionsContainer = document.createElement('div');
+    optionsContainer.style.marginTop = '10px';
+    
+    for (let i = 0; i < 4; i++) {
+        const optionDiv = document.createElement('div');
+        optionDiv.style.display = 'flex';
+        optionDiv.style.alignItems = 'center';
+        optionDiv.style.marginBottom = '8px';
+        
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = `${questionId}_correct`;
+        radio.value = i;
+        radio.style.width = 'auto';
+        radio.style.marginLeft = '10px';
+        radio.addEventListener('change', () => updateQuestion(questionId, 'correctAnswer', i));
+        if (i === 0) radio.checked = true;
+        
+        const optionInput = document.createElement('input');
+        optionInput.type = 'text';
+        optionInput.placeholder = `תשובה ${i + 1}`;
+        optionInput.maxLength = 100;
+        optionInput.style.flex = '1';
+        optionInput.addEventListener('change', (e) => updateQuestionOption(questionId, i, e.target.value));
+        
+        optionDiv.appendChild(radio);
+        optionDiv.appendChild(optionInput);
+        optionsContainer.appendChild(optionDiv);
+    }
+    
+    optionsFormGroup.appendChild(optionsContainer);
+    questionCard.appendChild(optionsFormGroup);
     
     container.appendChild(questionCard);
 }
