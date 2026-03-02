@@ -46,34 +46,7 @@ window.onload = function() {
             addQuestion();
         }
     }
-    
-    // הוספת event listeners לכפתורים
-    setupEventListeners();
 };
-
-function setupEventListeners() {
-    // כפתורים ראשיים
-    const addQuestionBtn = document.getElementById('addQuestionBtn');
-    if (addQuestionBtn) addQuestionBtn.addEventListener('click', addQuestion);
-    
-    const generateQuizBtn = document.getElementById('generateQuizBtn');
-    if (generateQuizBtn) generateQuizBtn.addEventListener('click', generateQuiz);
-    
-    const copyLinkBtn = document.getElementById('copyLinkBtn');
-    if (copyLinkBtn) copyLinkBtn.addEventListener('click', copyLink);
-    
-    const resetQuizBtn = document.getElementById('resetQuizBtn');
-    if (resetQuizBtn) resetQuizBtn.addEventListener('click', resetQuiz);
-    
-    const submitQuizBtn = document.getElementById('submitQuizBtn');
-    if (submitQuizBtn) submitQuizBtn.addEventListener('click', submitQuiz);
-    
-    const viewLeaderboardBtn = document.getElementById('viewLeaderboardBtn');
-    if (viewLeaderboardBtn) viewLeaderboardBtn.addEventListener('click', viewLeaderboard);
-    
-    const backToResultsBtn = document.getElementById('backToResultsBtn');
-    if (backToResultsBtn) backToResultsBtn.addEventListener('click', backToResults);
-}
 
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(section => {
