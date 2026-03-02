@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>כמה אתה מכיר אותי?</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,8 +22,8 @@
 
             <div id="questionsContainer"></div>
 
-            <button id="addQuestionBtn" class="btn-secondary">➕ הוסף שאלה</button>
-            <button id="generateQuizBtn" class="btn-primary">🚀 צור שאלון</button>
+            <button onclick="addQuestion()" class="btn-secondary">➕ הוסף שאלה</button>
+            <button onclick="generateQuiz()" class="btn-primary">🚀 צור שאלון</button>
         </div>
 
         <div id="shareQuiz" class="section hidden">
@@ -32,9 +31,9 @@
             <p>שתף את הקישור הזה עם חברים:</p>
             <div class="share-box">
                 <input type="text" id="shareLink" readonly>
-                <button id="copyLinkBtn" class="btn-secondary">📋 העתק</button>
+                <button onclick="copyLink()" class="btn-secondary">📋 העתק</button>
             </div>
-            <button id="resetQuizBtn" class="btn-primary">צור שאלון חדש</button>
+            <button onclick="resetQuiz()" class="btn-primary">צור שאלון חדש</button>
         </div>
 
         <div id="takeQuiz" class="section hidden">
@@ -44,7 +43,7 @@
                 <input type="text" id="participantName" placeholder="הכנס את שמך" maxlength="50">
             </div>
             <div id="quizQuestions"></div>
-            <button id="submitQuizBtn" class="btn-primary">שלח תשובות</button>
+            <button onclick="submitQuiz()" class="btn-primary">שלח תשובות</button>
         </div>
 
         <div id="results" class="section hidden">
@@ -56,13 +55,13 @@
                 <p id="scoreMessage"></p>
             </div>
             <div id="answersReview"></div>
-            <button id="viewLeaderboardBtn" class="btn-primary">📊 לוח המובילים</button>
+            <button onclick="viewLeaderboard()" class="btn-primary">📊 לוח המובילים</button>
         </div>
 
         <div id="leaderboard" class="section hidden">
             <h2>🏆 לוח המובילים</h2>
             <div id="leaderboardList"></div>
-            <button id="backToResultsBtn" class="btn-secondary">חזור לתוצאות</button>
+            <button onclick="backToResults()" class="btn-secondary">חזור לתוצאות</button>
         </div>
     </div>
 
