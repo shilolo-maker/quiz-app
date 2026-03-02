@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    direction: rtl;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.section {
+    animation: fadeIn 0.5s;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.question-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-right: 4px solid #667eea;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.question-number {
+    font-weight: bold;
+    color: #667eea;
+}
+
+.btn-remove {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 10px 5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.share-box {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.share-box input {
+    flex: 1;
+}
+
+.score-display {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.score-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.score-circle span {
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+#scoreMessage {
+    font-size: 1.5em;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.answer-review {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.answer-review.correct {
+    border-right: 4px solid #2ecc71;
+}
+
+.answer-review.incorrect {
+    border-right: 4px solid #e74c3c;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.leaderboard-rank {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+    min-width: 50px;
+}
+
+.leaderboard-name {
+    flex: 1;
+    font-weight: bold;
+}
+
+.leaderboard-score {
+    font-size: 1.2em;
+    color: #764ba2;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .score-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .score-circle span {
+        font-size: 2em;
+    }
+}
+
+/* סגנון לתשובות אמריקאיות */
+input[type="radio"] {
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+label:has(input[type="radio"]):hover {
+    border-color: #667eea !important;
+    background: #f8f9fa !important;
+}
+
+label:has(input[type="radio"]:checked) {
+    border-color: #667eea !important;
+    background: #e8ebff !important;
+}

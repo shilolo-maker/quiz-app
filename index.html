@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+    <title>כמה אתה מכיר אותי?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 כמה אתה מכיר אותי?</h1>
+            <p class="subtitle">צור שאלון אישי ובדוק מי באמת מכיר אותך!</p>
+        </header>
+
+        <div id="createQuiz" class="section">
+            <h2>צור את השאלון שלך</h2>
+            <div class="form-group">
+                <label for="creatorName">השם שלך:</label>
+                <input type="text" id="creatorName" placeholder="הכנס את שמך" maxlength="50">
+            </div>
+
+            <div id="questionsContainer"></div>
+
+            <button onclick="addQuestion()" class="btn-secondary">➕ הוסף שאלה</button>
+            <button onclick="generateQuiz()" class="btn-primary">🚀 צור שאלון</button>
+        </div>
+
+        <div id="shareQuiz" class="section hidden">
+            <h2>השאלון שלך מוכן! 🎉</h2>
+            <p>שתף את הקישור הזה עם חברים:</p>
+            <div class="share-box">
+                <input type="text" id="shareLink" readonly>
+                <button onclick="copyLink()" class="btn-secondary">📋 העתק</button>
+            </div>
+            <button onclick="resetQuiz()" class="btn-primary">צור שאלון חדש</button>
+        </div>
+
+        <div id="takeQuiz" class="section hidden">
+            <h2 id="quizTitle"></h2>
+            <div class="form-group">
+                <label for="participantName">השם שלך:</label>
+                <input type="text" id="participantName" placeholder="הכנס את שמך" maxlength="50">
+            </div>
+            <div id="quizQuestions"></div>
+            <button onclick="submitQuiz()" class="btn-primary">שלח תשובות</button>
+        </div>
+
+        <div id="results" class="section hidden">
+            <h2>התוצאות שלך! 🏆</h2>
+            <div class="score-display">
+                <div class="score-circle">
+                    <span id="scoreText"></span>
+                </div>
+                <p id="scoreMessage"></p>
+            </div>
+            <div id="answersReview"></div>
+            <button onclick="viewLeaderboard()" class="btn-primary">📊 לוח המובילים</button>
+        </div>
+
+        <div id="leaderboard" class="section hidden">
+            <h2>🏆 לוח המובילים</h2>
+            <div id="leaderboardList"></div>
+            <button onclick="backToResults()" class="btn-secondary">חזור לתוצאות</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
